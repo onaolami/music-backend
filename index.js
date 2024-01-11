@@ -2,14 +2,19 @@ const express = require("express");
 const app = express();
 const auth = require("./routes/auth");
 const songs = require("./routes/song");
-const playlists = require ("./routes/playlist");
-const comments = require("./routes/comment")
+const playlists = require("./routes/playlist");
+const comments = require("./routes/comment");
+const practice = require("./routes/practice");
+const external = require("./routes/external");
+const verifyAuth = require("./middlewares/verifyAuth");
 app.use(express.json());
 
 app.use("/auth", auth);
-app.use("/song", songs);
-app.use("/playlist", playlists)
-app.use("/comment",comments)
+app.use("/song", verifyAuth, songs);
+app.use("/playlist", playlists);
+app.use("/comment", comments);
+app.use("/practice", practice);
+app.use("/external", external);
 
 // app.get("/login", (req,res) => {
 //   console.log(req.params)
