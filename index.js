@@ -7,11 +7,18 @@ const comments = require("./routes/comment");
 const practice = require("./routes/practice");
 const external = require("./routes/external");
 const verifyAuth = require("./middlewares/verifyAuth");
+const cors = require("cors");
+var corsOptions = {
+  origin: "http://localhost:3000",
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.json());
 
 app.use("/auth", auth);
 app.use("/song", verifyAuth, songs);
-app.use("/playlist",verifyAuth, playlists);
+app.use("/playlist", verifyAuth, playlists);
 app.use("/comment", comments);
 app.use("/practice", practice);
 app.use("/external", external);
